@@ -14,7 +14,7 @@ So, please go the extra mile and have fun!
 ## Part one, The Johnemon™ class.
 In your coding adventures you will encounter many diferent JOHNEMON™S™. they will be your best friends and be able to fight for you!
 
-### Class: Johnemon™
+### Class: Johnemon™ 
 
 A Johnemon™ is a unique creature with the following attributes:
 

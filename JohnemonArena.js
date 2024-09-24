@@ -1,7 +1,7 @@
 
-
 class JohnemonArena {
   constructor(johnemon_1, johnemon_2) {
+    
 
   }
 

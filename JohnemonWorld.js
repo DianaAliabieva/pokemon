@@ -29,9 +29,10 @@ class JohnemonWorld {
         this.oneDayPasses();
         break;
       case 1:
-        // const johnemonFighter = new Johnemon();
-        //${johnemonFighter.name}
-        console.log(`A wild Johnemon™ appears! `);
+        
+        console.log(`A wild Johnemon™ appears!
+           `);
+        
         this.askForFight();
         break;
 
@@ -43,17 +44,17 @@ class JohnemonWorld {
   }
 
   arenafight() {
-    console.log(`works`);
-
     this.player.showCollection();
 
-    rl.question(`Choose your first pokemon to fight`, (answer) => {
+    rl.question(`Choose your first pokemon to fight: `, (answer) => {
       let chosenNumber = parseInt(answer) - 1;
-      let playerChoise =  this.player.showCollection[chosenNumber];
-      console.log(`you have chosen ${playerChoise.name}`);
+      let playerChoise =  this.player.johnemonCollection[chosenNumber];
+      console.log(`You have chosen ${playerChoise.name}`);
       const opponent = new Johnemon();
-      console.log(`you have ${opponent.name} and ${playerChoise.name}`);
+      console.log(`Your opponent:  ${opponent.name} and your johnemon: ${playerChoise.name}`);
+
     });
+
   }
 
   askForFight() {
@@ -103,7 +104,7 @@ promptUserAction() {
 
           this.player.healJohnemon(this.player.johnemonCollection[chosenNumber]);
           
-          this.oneDayPasses();
+          this.randomizeEvent();
         })
         break;
 
@@ -133,11 +134,11 @@ promptUserAction() {
             
             let chosenJohnemon = deadJohnemons[chosenNumber];
             this.player.reviveJohnemon(chosenJohnemon);
-            this.oneDayPasses();
+            this.randomizeEvent();
           })
         } else {
           console.log('No Johnemons to revive');
-          this.oneDayPasses();
+          this.randomizeEvent();
         }  
       
         break;
@@ -149,7 +150,7 @@ promptUserAction() {
                 
           this.player.releaseJohnemon(this.player.johnemonCollection[chosenNumber]);
           
-          this.oneDayPasses();
+          this.randomizeEvent();
         })
 
 
@@ -160,7 +161,7 @@ promptUserAction() {
         rl.question(`Which one you chose?`, (answer)=>{
           let chosenNumber = parseInt(answer) - 1;
           this.player.renameJohnemon(this.player.johnemonCollection[chosenNumber]);
-          this.oneDayPasses();
+          this.randomizeEvent();
         })
 
        

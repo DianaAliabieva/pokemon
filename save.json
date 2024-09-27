@@ -1,15 +1,15 @@
 {
-  "name": "d",
+  "name": "dddddddd",
   "johnemonCollection": [
     {
-      "name": "imera",
+      "name": "olison",
       "level": 1,
       "experienceMeter": 0,
       "attackRange": 7,
-      "defenseRange": 3,
-      "healthPool": 25,
-      "catchPhrase": "I need to sleep",
-      "currentHealth": 0
+      "defenseRange": 2,
+      "healthPool": 30,
+      "catchPhrase": "Can you be my friend",
+      "currentHealth": 30
     }
   ],
   "healingItems": 5,

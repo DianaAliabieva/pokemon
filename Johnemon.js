@@ -37,8 +37,8 @@ class Johnemon {
     this.defenseRange = this.randomNumber(1, 3),
     this.healthPool =this.randomNumber(10, 30),
     this.catchPhrase = this.randomPhrase(),
-    this.currentHealth = 0;
-    //this.healthPool;
+    this.currentHealth = this.healthPool;
+    
   }
             
     randomName(){

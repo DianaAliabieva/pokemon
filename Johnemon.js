@@ -35,8 +35,10 @@ class Johnemon {
     this.experienceMeter = 0,
     this.attackRange = this.randomNumber(1, 8),
     this.defenseRange = this.randomNumber(1, 3),
-    this.healthPool = this.randomNumber(10, 30),
-    this.catchPhrase = this.randomPhrase();
+    this.healthPool =this.randomNumber(10, 30),
+    this.catchPhrase = this.randomPhrase(),
+    this.currentHealth = 0;
+    //this.healthPool;
   }
             
     randomName(){
@@ -55,7 +57,7 @@ class Johnemon {
     }
 
     attack(defender){
-      const damage =this.randomNumber (this.attackRange * this.level, this.attackRange) - defender.defenseRange;
+      const damage =this.randomNumber(this.attackRange * this.level, this.attackRange) - defender.defenseRange;
       defender.healthPool -= damage;
       console.log(`${this.name} attacked ${defender.name} and dealt ${damage} damage!`);
     }

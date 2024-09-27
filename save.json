@@ -1,0 +1,18 @@
+{
+  "name": "d",
+  "johnemonCollection": [
+    {
+      "name": "imera",
+      "level": 1,
+      "experienceMeter": 0,
+      "attackRange": 7,
+      "defenseRange": 3,
+      "healthPool": 25,
+      "catchPhrase": "I need to sleep",
+      "currentHealth": 0
+    }
+  ],
+  "healingItems": 5,
+  "reviveItems": 3,
+  "JOHNEBALLS": 10
+}

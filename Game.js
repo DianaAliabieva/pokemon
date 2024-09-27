@@ -1,18 +1,25 @@
-const JohnemonMaster = require('./JohnemonMaster'); // Replace 'your_classes_filename' with the actual filename
+//Game.js
+
 const Johnemon = require('./Johnemon')
-const JohnemonWorld = require ('./JohnemonWorld')
+const JohnemonMaster =  require('./JohnemonMaster'); 
+//import 
+const JohnemonWorld = require ('./JohnemonWorld');
+const JohnemonArena = require('./JohnemonArena');
 const fs = require('fs');
 const rl = require('./Readline');
 
 
-const player = new JohnemonMaster() ;
-const world = new JohnemonWorld();
+const player = new JohnemonMaster();
+const world = new JohnemonWorld(player);
+const arena = new JohnemonArena();
+
+
+
+
 
 function saveGameState(){
-  
+  fs.writeFileSync("save.json", JSON.stringify(player, null, 2)); console.log("Game saved");
 }
-
-
 
 function askForName() {
   return "What is your name, Johnemon Master?" 
@@ -32,12 +39,16 @@ function proposeFirstJohnemon(rl){
 
   rl.question(`Choose your first Johnemon?(1-3)` ,(answer) =>{
     let chosenNumber = parseInt(answer) - 1;
-    console.log(`${player.name}, you have received ${johnemons[chosenNumber].name}`);
+    console.log(chosenNumber)
+    console.log(`-----------------------------------
+      ${player.name}, you have received ${johnemons[chosenNumber].name}
+----------------------------`);
     player.johnemonCollection.push(johnemons[chosenNumber]);
+    player.showCollection();
+    saveGameState();
+    world.oneDayPasses();
+    
   })
-  
-  
-
 }
 
 function startGame(){
@@ -50,8 +61,24 @@ function startGame(){
 }
 
 
+// function arenafight() {
+//   console.log(`works`);
+  
+//   player.showCollection();
+//   rl.question(`Choose your first pokemon to fight`, (answer) => {
+//     let chosenNumber = parseInt(answer) - 1;
+//     const playerChoise = player.johnemonCollection[chosenNumber];
+//     console.log(`you have chosen ${playerChoise}`);
+//   });
+
+//   const opponent = new Johnemon();
+//   console.log(`you have ${opponent} and ${playerChoise}`);
+
+//   arena.startBattle(playerChoise, opponent);
+// }
+
+startGame();
 
 
-startGame()
 
 

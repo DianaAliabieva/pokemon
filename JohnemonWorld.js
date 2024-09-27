@@ -1,18 +1,24 @@
+//JohnemonWorld.js
 const JohnemonArena = require("./JohnemonArena");
 const Johnemon = require("./Johnemon");
 const rl = require("./Readline");
 
-const arena = new JohnemonArena();
+const game = require("./Game.js");
 
 class JohnemonWorld {
-  constructor() {
-    (this.day = 0), (this.logs = []);
+  constructor(player) {
+    this.day = 1, 
+    this.logs = [],
+    this.player = player
   }
 
   oneDayPasses() {
     this.day += 1;
-    console.log(`One day has passed!`);
-    this.randomizeEvent();
+    this.addLog('A new day has started in the Johnemon™ World!');
+    console.log(`Day ${this.day}: A new day begins in the Johnemon™ World!`);
+    this.promptUserAction();
+
+    // this.randomizeEvent();
   }
 
   randomizeEvent() {
@@ -23,7 +29,9 @@ class JohnemonWorld {
         this.oneDayPasses();
         break;
       case 1:
-        console.log(`A wild Johnemon™ appears!`);
+        // const johnemonFighter = new Johnemon();
+        //${johnemonFighter.name}
+        console.log(`A wild Johnemon™ appears! `);
         this.askForFight();
         break;
 
@@ -32,6 +40,20 @@ class JohnemonWorld {
 
         break;
     }
+  }
+
+  arenafight() {
+    console.log(`works`);
+
+    this.player.showCollection();
+
+    rl.question(`Choose your first pokemon to fight`, (answer) => {
+      let chosenNumber = parseInt(answer) - 1;
+      let playerChoise =  this.player.showCollection[chosenNumber];
+      console.log(`you have chosen ${playerChoise.name}`);
+      const opponent = new Johnemon();
+      console.log(`you have ${opponent.name} and ${playerChoise.name}`);
+    });
   }
 
   askForFight() {
@@ -43,15 +65,128 @@ class JohnemonWorld {
       }
       if (answer === "n") {
         console.log(`No fight today, see you tomorrow `);
-        oneDayPasses();
+        this.oneDayPasses();
         return;
-      } 
+      }
       console.log(`Battle has started!`);
-      arena.startBattle();
-      return;
+      this.arenafight();
     });
   }
-  addLog(newLog) {}
+  addLog(newLog) {
+// const logEntry = `Day ${this.day}: ${newLog}`;
+//     this.logs.push(logEntry);
+//     console.log(logEntry);
+      // Also display it in the console
+  }
+
+
+
+
+promptUserAction() {
+  const options = `
+  What would you like to do today?
+  1. Heal Johnemon
+  2. Revive Johnemon™
+  3. Release Johnemon™
+  4. Rename Johnemon™
+  5. Do nothing
+  Choose an option (1-4): `;
+
+  rl.question(options, (answer) => {
+    switch (answer) {
+      case '1':
+        this.player.showCollection();
+        rl.question(`Which one you chose?`, (answer)=>{
+          let chosenNumber = parseInt(answer) - 1;
+          
+          
+
+          this.player.healJohnemon(this.player.johnemonCollection[chosenNumber]);
+          
+          this.oneDayPasses();
+        })
+        break;
+
+
+
+      case '2':
+        let deadJohnemons = []; // To store dead Johnemons
+        this.player.johnemonCollection.forEach(johnemon => {
+          if (johnemon.currentHealth <= 0) {
+            deadJohnemons.push(johnemon); // Add dead johnemon to the new array
+          }
+        });
+        
+        // Check if there are dead johnemons and show the result in console
+        if (deadJohnemons.length > 0) {
+         
+          deadJohnemons.forEach((johnemon, index) => {
+            console.log(`Here is your dead collection:
+      
+                      ${index+1}. ${johnemon.name}
+                      
+                      `);
+          });
+          
+          rl.question(`Which one do you want to revive?`, (answer)=>{
+            let chosenNumber = parseInt(answer) - 1;
+            
+            let chosenJohnemon = deadJohnemons[chosenNumber];
+            this.player.reviveJohnemon(chosenJohnemon);
+            this.oneDayPasses();
+          })
+        } else {
+          console.log('No Johnemons to revive');
+          this.oneDayPasses();
+        }  
+      
+        break;
+      case '3':
+        this.player.showCollection();
+        
+        rl.question(`Which one you chose?`, (answer)=>{
+          let chosenNumber = parseInt(answer) - 1;
+                
+          this.player.releaseJohnemon(this.player.johnemonCollection[chosenNumber]);
+          
+          this.oneDayPasses();
+        })
+
+
+        
+        break;
+      case '4':
+        this.player.showCollection();
+        rl.question(`Which one you chose?`, (answer)=>{
+          let chosenNumber = parseInt(answer) - 1;
+          this.player.renameJohnemon(this.player.johnemonCollection[chosenNumber]);
+          this.oneDayPasses();
+        })
+
+       
+        break;
+        case '5':
+          this.randomizeEvent()
+        
+        break;
+      default:
+        console.log("Invalid choice, please select a valid option (1-4).");
+        this.promptUserAction();
+        break;
+      }
+    });
+  }
 }
+
+
+
+
+
+
+
+
+
+
+
 
 module.exports = JohnemonWorld;
